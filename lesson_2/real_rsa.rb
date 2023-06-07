@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'openssl'
 
 class Exchanger
@@ -12,13 +14,13 @@ class Exchanger
   end
 
   def sign(message)
-    private_key.sign OpenSSL::Digest::SHA256.new, message
+    private_key.sign OpenSSL::Digest.new('SHA256'), message
   end
 
   def valid?(message, pub_key_pem)
     pub_key = OpenSSL::PKey::RSA.new pub_key_pem
 
-    pub_key.verify(OpenSSL::Digest::SHA256.new, message[:signature], message[:initial])
+    pub_key.verify(OpenSSL::Digest.new('SHA256'), message[:signature], message[:initial])
   end
 end
 

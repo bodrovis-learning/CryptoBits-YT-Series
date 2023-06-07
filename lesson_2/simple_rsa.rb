@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'prime'
 require 'base64'
 require_relative 'jha'
@@ -36,13 +38,13 @@ class SimpleRSA
 
   def encrypt(arr, key, local_max)
     arr.map do |char_code|
-      (char_code.to_i ** key) % local_max
+      (char_code.to_i**key) % local_max
     end
   end
 
   def decrypt(arr, key, local_max)
     arr.map do |s_char|
-      (s_char.to_i ** key) % local_max
+      (s_char.to_i**key) % local_max
     end
   end
 
@@ -80,4 +82,3 @@ class SimpleRSA
     Prime.take(rand(1..limit)).last
   end
 end
-
